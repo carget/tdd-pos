@@ -1,10 +1,8 @@
 package com.mishkurov;
 
 import org.junit.Before;
-import org.junit.Rule;
 import org.junit.Test;
 import org.junit.experimental.theories.*;
-import org.junit.rules.ExpectedException;
 import org.junit.runner.RunWith;
 
 import static org.hamcrest.Matchers.is;
@@ -41,15 +39,29 @@ public class posTest {
         assertThat(pos.getDeposit(), is(5));
     }
 
-    @Rule
-    public ExpectedException thrown = ExpectedException.none();
-
-//    @Test(expected = IllegalArgumentException.class)
+    @Test(expected = IllegalArgumentException.class)
     @Theory
-    public void negativeCoinTest(@FromDataPoints("NegativeAndZeroCoins") int coinValue ) {
-        thrown.expect(IllegalArgumentException.class);
-        thrown.expectMessage("Coin value must be positive");
+    public void negativeCoinTest(@FromDataPoints("NegativeAndZeroCoins") int coinValue) {
+        pos.acceptCoin(coinValue);
+    }
 
-        pos.acceptCoin(-1);
+    @Theory
+    public void validCoins(@FromDataPoints("ValidCoins") int coinValue) {
+        pos.acceptCoin(coinValue);
+        assertThat(pos.getDeposit(), is(coinValue));
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    @Theory
+    public void invalidCoins(@FromDataPoints("InvalidCoins") int coinValue) {
+        pos.acceptCoin(coinValue);
+    }
+
+    @Theory
+    public void sumCoins() {
+        pos.acceptCoin(1);
+        pos.acceptCoin(1);
+        pos.acceptCoin(1);
+        assertThat(pos.getDeposit(), is(3));
     }
 }
