@@ -6,11 +6,21 @@ public class Pos implements PosInt {
 
     private static final int INITIAL_COIN_QUANTITY = 100;
 
+    private static Map<Integer, Product> allowedProduct;
+
+    static {
+        allowedProduct = new HashMap<>();
+        allowedProduct.put(1, new Product(1, "Tea", 25));
+        allowedProduct.put(2, new Product(2, "Coffee", 35));
+        allowedProduct.put(3, new Product(3, "Juice", 45));
+    }
+
     private int deposit;
     private Integer[] validCoins = new Integer[]{1, 5, 10, 25, 50};
     private Integer[] validCoinsReverse = new Integer[]{50, 25, 10, 5, 1};
     private Map<Coin, Integer> coinRemainder;
-    private Map<String, Integer> basket;
+
+    private Map<Product, Integer> basket;
 
     public Pos() {
         this.deposit = 0;
@@ -71,11 +81,6 @@ public class Pos implements PosInt {
         return null;
     }
 
-    @Override
-    public void addProductToBasket(Product product) {
-
-    }
-
     public int getDeposit() {
         return deposit;
     }
@@ -90,12 +95,17 @@ public class Pos implements PosInt {
         return null;
     }
 
-    public Map<String, Integer> getBasket() {
+    public Map<Product, Integer> getBasket() {
         return basket;
     }
 
-    public void addProduct(String product) {
+    @Override
+    public void addProductToBasket(Product product) {
         Integer productCount = basket.get(product);
         basket.put(product, productCount == null ? 1 : productCount + 1);
+    }
+
+    public Product getProductById(int i) {
+        return allowedProduct.get(i);
     }
 }

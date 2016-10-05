@@ -70,16 +70,16 @@ public class posTest {
 
     @Theory
     public void addProductToBasket() {
-        pos.addProduct("Tea");
-        assertThat(pos.getBasket().get("Tea"), is(1));
-        pos.addProduct("Tea");
-        pos.addProduct("Tea");
-        assertThat(pos.getBasket().get("Tea"), is(3));
+        pos.addProductToBasket(pos.getProductById(1));
+        assertThat(pos.getBasket().get(pos.getProductById(1)), is(1));
+        pos.addProductToBasket(pos.getProductById(1));
+        pos.addProductToBasket(pos.getProductById(1));
+        assertThat(pos.getBasket().get(pos.getProductById(1)), is(3));
     }
 
     @Theory
     public void cancelAndGetChange() {
-        pos.addProduct("Tea");
+        pos.addProductToBasket(pos.getProductById(1));
         pos.insertCoin(new Coin(1));
         pos.insertCoin(new Coin(1));
         pos.insertCoin(new Coin(1));
