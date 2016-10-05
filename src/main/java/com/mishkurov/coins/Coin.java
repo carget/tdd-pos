@@ -1,8 +1,5 @@
 package com.mishkurov.coins;
 
-/**
- * @author Anton_Mishkurov
- */
 public class Coin implements Comparable<Coin> {
 
     private int value;

@@ -2,10 +2,6 @@ package com.mishkurov.sales;
 
 import com.mishkurov.products.Product;
 
-/**
- *
- * @author Anton_Mishkurov
- */
 public class SalesLineItem {
     private int quantity;
     private Product product;

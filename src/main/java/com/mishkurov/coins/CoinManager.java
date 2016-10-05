@@ -5,9 +5,6 @@ import com.mishkurov.exceptions.CoinManagerException;
 
 import java.util.*;
 
-/**
- * @author Anton_Mishkurov
- */
 public class CoinManager {
 
     private static final int INITIAL_COIN_QUANTITY = 100;

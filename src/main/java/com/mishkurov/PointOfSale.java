@@ -8,9 +8,6 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 
-/**
- * @author Anton_Mishkurov
- */
 public interface PointOfSale {
         void insertCoin(Coin coin);
 

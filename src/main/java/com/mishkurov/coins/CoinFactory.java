@@ -8,9 +8,6 @@ import java.util.Map;
 import java.util.SortedSet;
 import java.util.TreeSet;
 
-/**
- * @author Anton_Mishkurov
- */
 public class CoinFactory {
     private static Map<Integer, Coin> allowedCoins;
     private static SortedSet<Coin> sortedCoinsSet;

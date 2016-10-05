@@ -1,9 +1,5 @@
 package com.mishkurov.exceptions;
 
-/**
- *
- * @author Anton_Mishkurov
- */
 public class CoinManagerException extends RuntimeException {
 
     public CoinManagerException(){

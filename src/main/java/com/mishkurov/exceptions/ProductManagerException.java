@@ -1,9 +1,5 @@
 package com.mishkurov.exceptions;
 
-/**
- *
- * @author Anton_Mishkurov
- */
 public class ProductManagerException extends RuntimeException {
 
     public ProductManagerException(){

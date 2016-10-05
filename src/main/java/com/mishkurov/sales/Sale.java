@@ -6,9 +6,6 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * @author Anton_Mishkurov
- */
 public class Sale {
     private LocalDate date;
     private List<SalesLineItem> salesLineItemList;

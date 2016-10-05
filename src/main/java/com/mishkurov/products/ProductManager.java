@@ -8,9 +8,6 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
-/**
- * @author Anton_Mishkurov
- */
 public class ProductManager {
 
     private static final int INITIAL_QUANTITY = 100;

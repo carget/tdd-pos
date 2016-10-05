@@ -1,8 +1,5 @@
 package com.mishkurov.products;
 
-/**
- * @author Anton_Mishkurov
- */
 public class Product {
     private int id;
     private String name;
