@@ -72,9 +72,9 @@ public class posTest {
     public void addProductToBasket() {
         pos.addProductToBasket(pos.getProductById(1));
         assertThat(pos.getBasket().get(pos.getProductById(1)), is(1));
-        pos.addProductToBasket(pos.getProductById(1));
-        pos.addProductToBasket(pos.getProductById(1));
-        assertThat(pos.getBasket().get(pos.getProductById(1)), is(3));
+        pos.addProductToBasket(pos.getProductById(2));
+        pos.addProductToBasket(pos.getProductById(2));
+        assertThat(pos.getBasket().get(pos.getProductById(2)), is(2));
     }
 
     @Theory
@@ -89,7 +89,6 @@ public class posTest {
         pos.insertCoin(new Coin(25));
         assertThat(pos.getDeposit(), is(80));
         Collection<Coin> change = pos.cancelAndGetChange();
-        System.out.println(change);
         assertThat(calcChange(change), is(80));
         assertThat(pos.getDeposit(), is(0));
     }
@@ -100,6 +99,21 @@ public class posTest {
             sum += coin.getValue();
         }
         return sum;
+    }
+
+    @Theory
+    public void checkOutTest() {
+        pos.addProductToBasket(pos.getProductById(1));
+        pos.insertCoin(new Coin(1));
+        pos.insertCoin(new Coin(1));
+        pos.insertCoin(new Coin(1));
+        pos.insertCoin(new Coin(1));
+        pos.insertCoin(new Coin(1));
+        pos.insertCoin(new Coin(50));
+        pos.insertCoin(new Coin(25));
+        Collection<Coin> change = pos.checkout();
+        assertThat(calcChange(change), is(80 - pos.getProductById(1).getPrice()));
+        assertThat(pos.getDeposit(), is(0));
     }
 
 }

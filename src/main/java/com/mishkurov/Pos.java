@@ -1,5 +1,6 @@
 package com.mishkurov;
 
+import java.time.LocalDate;
 import java.util.*;
 
 public class Pos implements PosInt {
@@ -31,6 +32,7 @@ public class Pos implements PosInt {
         }
     }
 
+    @Override
     public void insertCoin(Coin coin) {
         if (coin.getValue() <= 0) {
             throw new IllegalArgumentException("Coin value must be positive");
@@ -78,7 +80,7 @@ public class Pos implements PosInt {
 
     @Override
     public Collection<Product> getAvailableProducts() {
-        return null;
+        return allowedProduct.values();
     }
 
     public int getDeposit() {
@@ -92,7 +94,19 @@ public class Pos implements PosInt {
 
     @Override
     public List<Coin> checkout() {
-        return null;
+        Sale sale = new Sale(LocalDate.now());
+        for (Product p : basket.keySet()) {
+            sale.makeLineItem(p, basket.get(p));
+        }
+        if (deposit < sale.total()) {
+            System.out.println("Deposit is to low :-( Insert more coins.");
+            return null;
+        }
+        int changeValue = deposit - sale.total();
+        List<Coin> change = getChange(changeValue);
+        deposit = 0;
+        basket = new HashMap<>();
+        return change;
     }
 
     public Map<Product, Integer> getBasket() {
