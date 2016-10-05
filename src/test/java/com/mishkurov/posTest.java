@@ -14,18 +14,18 @@ public class posTest {
     private Pos pos;
 
     @DataPoints(value = "NegativeAndZeroCoins")
-    public static int[] NegativeAndZeroCoinsValues() {
-        return new int[]{0, -1, -Integer.MIN_VALUE};
+    public static Coin[] NegativeAndZeroCoinsValues() {
+        return new Coin[]{new Coin(0), new Coin(-1), new Coin(-Integer.MIN_VALUE)};
     }
 
     @DataPoints(value = "ValidCoins")
-    public static int[] ValidCoinsValues() {
-        return new int[]{1, 5, 10, 25, 50};
+    public static Coin[] ValidCoinsValues() {
+        return new Coin[]{new Coin(1), new Coin(5), new Coin(10), new Coin(25), new Coin(50)};
     }
 
     @DataPoints(value = "InvalidCoins")
-    public static int[] InvalidCoinsValues() {
-        return new int[]{2, 3, 15, 75, 100};
+    public static Coin[] InvalidCoinsValues() {
+        return new Coin[]{new Coin(2), new Coin(3), new Coin(15), new Coin(75), new Coin(100)};
     }
 
     @Before
@@ -34,34 +34,46 @@ public class posTest {
     }
 
     @Theory
-    public void acceptCoin() {
-        pos.acceptCoin(5);
+    public void insertCoin() {
+        pos.insertCoin(new Coin(5));
         assertThat(pos.getDeposit(), is(5));
     }
 
     @Test(expected = IllegalArgumentException.class)
     @Theory
-    public void negativeCoinTest(@FromDataPoints("NegativeAndZeroCoins") int coinValue) {
-        pos.acceptCoin(coinValue);
+    public void negativeCoinTest(@FromDataPoints("NegativeAndZeroCoins") Coin coin) {
+        pos.insertCoin(coin);
     }
 
     @Theory
-    public void validCoins(@FromDataPoints("ValidCoins") int coinValue) {
-        pos.acceptCoin(coinValue);
-        assertThat(pos.getDeposit(), is(coinValue));
+    public void validCoins(@FromDataPoints("ValidCoins") Coin coin) {
+        pos.insertCoin(coin);
+        assertThat(pos.getDeposit(), is(coin.getValue()));
     }
 
     @Test(expected = IllegalArgumentException.class)
     @Theory
-    public void invalidCoins(@FromDataPoints("InvalidCoins") int coinValue) {
-        pos.acceptCoin(coinValue);
+    public void invalidCoins(@FromDataPoints("InvalidCoins") Coin coin) {
+        pos.insertCoin(coin);
     }
 
     @Theory
     public void sumCoins() {
-        pos.acceptCoin(1);
-        pos.acceptCoin(1);
-        pos.acceptCoin(1);
+        Coin coin = new Coin(1);
+        pos.insertCoin(coin);
+        pos.insertCoin(coin);
+        pos.insertCoin(coin);
         assertThat(pos.getDeposit(), is(3));
     }
+
+    @Theory
+    public void addProductToBasket() {
+        pos.addProduct("Tea");
+        assertThat(pos.getBasket().get("Tea"), is(1));
+        pos.addProduct("Tea");
+        pos.addProduct("Tea");
+        assertThat(pos.getBasket().get("Tea"), is(3));
+    }
+
+
 }
