@@ -1,4 +1,4 @@
-package com.mishkurov;
+package com.mishkurov.coins;
 
 /**
  * @author Anton_Mishkurov

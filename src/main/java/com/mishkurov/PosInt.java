@@ -1,5 +1,6 @@
 package com.mishkurov;
 
+import com.mishkurov.coins.Coin;
 import com.mishkurov.products.Product;
 
 import java.util.Collection;
