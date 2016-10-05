@@ -17,7 +17,7 @@ import static org.junit.Assert.*;
 @RunWith(Theories.class)
 public class posTest {
 
-    private Pos pos;
+    private PointOfSale pos;
 
     @DataPoints(value = "NegativeAndZeroCoins")
     public static Coin[] NegativeAndZeroCoinsValues() {
@@ -36,7 +36,7 @@ public class posTest {
 
     @Before
     public void setUp() throws Exception {
-        pos = new Pos();
+        pos = new SimplePos();
     }
 
     @Theory

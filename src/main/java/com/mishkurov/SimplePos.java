@@ -9,7 +9,7 @@ import com.mishkurov.sales.Sale;
 import java.time.LocalDate;
 import java.util.*;
 
-public class Pos implements PosInt {
+public class SimplePos implements PointOfSale {
 
     private static final int INITIAL_COIN_QUANTITY = 100;
 
@@ -20,7 +20,7 @@ public class Pos implements PosInt {
     private List<Sale> saleList;
     private Map<Product, Integer> basket;
 
-    public Pos() {
+    public SimplePos() {
         coinManager = new CoinManager();
         productManager = new ProductManager();
         saleList = new ArrayList<>();
@@ -84,6 +84,7 @@ public class Pos implements PosInt {
         return change;
     }
 
+    @Override
     public Map<Product, Integer> getBasket() {
         return basket;
     }
