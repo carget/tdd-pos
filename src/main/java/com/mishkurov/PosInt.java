@@ -1,5 +1,7 @@
 package com.mishkurov;
 
+import com.mishkurov.products.Product;
+
 import java.util.Collection;
 import java.util.List;
 

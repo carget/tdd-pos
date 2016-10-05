@@ -1,5 +1,8 @@
 package com.mishkurov;
 
+import com.mishkurov.products.Product;
+import com.mishkurov.products.ProductManager;
+
 import java.time.LocalDate;
 import java.util.*;
 
@@ -7,15 +10,7 @@ public class Pos implements PosInt {
 
     private static final int INITIAL_COIN_QUANTITY = 100;
 
-    private static Map<Integer, Product> allowedProduct;
-
-    static {
-        allowedProduct = new HashMap<>();
-        allowedProduct.put(1, new Product(1, "Tea", 25));
-        allowedProduct.put(2, new Product(2, "Coffee", 35));
-        allowedProduct.put(3, new Product(3, "Juice", 45));
-    }
-
+    private ProductManager productManager;
     private int deposit;
     private Integer[] validCoins = new Integer[]{1, 5, 10, 25, 50};
     private Integer[] validCoinsReverse = new Integer[]{50, 25, 10, 5, 1};
@@ -24,6 +19,7 @@ public class Pos implements PosInt {
     private Map<Product, Integer> basket;
 
     public Pos() {
+        productManager = new ProductManager();
         saleList = new ArrayList<>();
         this.deposit = 0;
         basket = new HashMap<>();
@@ -81,7 +77,7 @@ public class Pos implements PosInt {
 
     @Override
     public Collection<Product> getAvailableProducts() {
-        return allowedProduct.values();
+        return productManager.getAvailableProducts();
     }
 
     public int getDeposit() {
@@ -105,6 +101,7 @@ public class Pos implements PosInt {
         }
         int changeValue = deposit - sale.total();
         List<Coin> change = getChange(changeValue);
+        productManager.decreaseProductsAmountInStock(basket);
         deposit = 0;
         basket = new HashMap<>();
         saleList.add(sale);
@@ -121,7 +118,4 @@ public class Pos implements PosInt {
         basket.put(product, productCount == null ? 1 : productCount + 1);
     }
 
-    public Product getProductById(int i) {
-        return allowedProduct.get(i);
-    }
 }

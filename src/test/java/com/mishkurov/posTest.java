@@ -1,5 +1,6 @@
 package com.mishkurov;
 
+import com.mishkurov.products.ProductFactory;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.experimental.theories.*;
@@ -71,16 +72,16 @@ public class posTest {
 
     @Theory
     public void addProductToBasket() {
-        pos.addProductToBasket(pos.getProductById(1));
-        assertThat(pos.getBasket().get(pos.getProductById(1)), is(1));
-        pos.addProductToBasket(pos.getProductById(2));
-        pos.addProductToBasket(pos.getProductById(2));
-        assertThat(pos.getBasket().get(pos.getProductById(2)), is(2));
+        pos.addProductToBasket(ProductFactory.getProductById(1));
+        assertThat(pos.getBasket().get(ProductFactory.getProductById(1)), is(1));
+        pos.addProductToBasket(ProductFactory.getProductById(2));
+        pos.addProductToBasket(ProductFactory.getProductById(2));
+        assertThat(pos.getBasket().get(ProductFactory.getProductById(2)), is(2));
     }
 
     @Theory
     public void cancelAndGetChange() {
-        pos.addProductToBasket(pos.getProductById(1));
+        pos.addProductToBasket(ProductFactory.getProductById(1));
         pos.insertCoin(new Coin(1));
         pos.insertCoin(new Coin(1));
         pos.insertCoin(new Coin(1));
@@ -104,7 +105,7 @@ public class posTest {
 
     @Theory
     public void checkOutTest() {
-        pos.addProductToBasket(pos.getProductById(1));
+        pos.addProductToBasket(ProductFactory.getProductById(1));
         pos.insertCoin(new Coin(1));
         pos.insertCoin(new Coin(1));
         pos.insertCoin(new Coin(1));
@@ -113,7 +114,7 @@ public class posTest {
         pos.insertCoin(new Coin(50));
         pos.insertCoin(new Coin(25));
         Collection<Coin> change = pos.checkout();
-        assertThat(calcChange(change), is(80 - pos.getProductById(1).getPrice()));
+        assertThat(calcChange(change), is(80 - ProductFactory.getProductById(1).getPrice()));
         assertThat(pos.getDeposit(), is(0));
     }
 
@@ -121,10 +122,10 @@ public class posTest {
     public void salesListTest() {
         pos.insertCoin(new Coin(50));
         pos.insertCoin(new Coin(50));
-        pos.addProductToBasket(pos.getProductById(1));
+        pos.addProductToBasket(ProductFactory.getProductById(1));
         pos.checkout();
         pos.insertCoin(new Coin(50));
-        pos.addProductToBasket(pos.getProductById(2));
+        pos.addProductToBasket(ProductFactory.getProductById(2));
         pos.checkout();
         List<Sale> saleList = pos.getSalesList();
         assertThat(saleList.size(), is(2));

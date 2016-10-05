@@ -1,5 +1,7 @@
 package com.mishkurov;
 
+import com.mishkurov.products.Product;
+
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;

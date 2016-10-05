@@ -1,4 +1,4 @@
-package com.mishkurov;
+package com.mishkurov.products;
 
 /**
  * @author Anton_Mishkurov

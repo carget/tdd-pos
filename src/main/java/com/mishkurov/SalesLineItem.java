@@ -1,5 +1,7 @@
 package com.mishkurov;
 
+import com.mishkurov.products.Product;
+
 /**
  *
  * @author Anton_Mishkurov
