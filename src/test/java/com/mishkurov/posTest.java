@@ -6,6 +6,7 @@ import org.junit.experimental.theories.*;
 import org.junit.runner.RunWith;
 
 import java.util.Collection;
+import java.util.List;
 
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.*;
@@ -114,6 +115,19 @@ public class posTest {
         Collection<Coin> change = pos.checkout();
         assertThat(calcChange(change), is(80 - pos.getProductById(1).getPrice()));
         assertThat(pos.getDeposit(), is(0));
+    }
+
+    @Theory
+    public void salesListTest() {
+        pos.insertCoin(new Coin(50));
+        pos.insertCoin(new Coin(50));
+        pos.addProductToBasket(pos.getProductById(1));
+        pos.checkout();
+        pos.insertCoin(new Coin(50));
+        pos.addProductToBasket(pos.getProductById(2));
+        pos.checkout();
+        List<Sale> saleList = pos.getSalesList();
+        assertThat(saleList.size(), is(2));
     }
 
 }

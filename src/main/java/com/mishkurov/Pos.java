@@ -20,10 +20,11 @@ public class Pos implements PosInt {
     private Integer[] validCoins = new Integer[]{1, 5, 10, 25, 50};
     private Integer[] validCoinsReverse = new Integer[]{50, 25, 10, 5, 1};
     private Map<Coin, Integer> coinRemainder;
-
+    private List<Sale> saleList;
     private Map<Product, Integer> basket;
 
     public Pos() {
+        saleList = new ArrayList<>();
         this.deposit = 0;
         basket = new HashMap<>();
         coinRemainder = new HashMap<>();
@@ -89,7 +90,7 @@ public class Pos implements PosInt {
 
     @Override
     public List<Sale> getSalesList() {
-        return null;
+        return saleList;
     }
 
     @Override
@@ -106,6 +107,7 @@ public class Pos implements PosInt {
         List<Coin> change = getChange(changeValue);
         deposit = 0;
         basket = new HashMap<>();
+        saleList.add(sale);
         return change;
     }
 
