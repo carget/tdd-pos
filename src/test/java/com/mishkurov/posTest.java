@@ -2,6 +2,7 @@ package com.mishkurov;
 
 import com.mishkurov.coins.Coin;
 import com.mishkurov.products.ProductFactory;
+import com.mishkurov.sales.Sale;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.experimental.theories.*;

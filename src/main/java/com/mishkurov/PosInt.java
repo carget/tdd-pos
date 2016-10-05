@@ -2,6 +2,7 @@ package com.mishkurov;
 
 import com.mishkurov.coins.Coin;
 import com.mishkurov.products.Product;
+import com.mishkurov.sales.Sale;
 
 import java.util.Collection;
 import java.util.List;

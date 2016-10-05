@@ -4,6 +4,7 @@ import com.mishkurov.coins.Coin;
 import com.mishkurov.coins.CoinManager;
 import com.mishkurov.products.Product;
 import com.mishkurov.products.ProductManager;
+import com.mishkurov.sales.Sale;
 
 import java.time.LocalDate;
 import java.util.*;

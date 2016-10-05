@@ -1,4 +1,4 @@
-package com.mishkurov;
+package com.mishkurov.sales;
 
 import com.mishkurov.products.Product;
 
